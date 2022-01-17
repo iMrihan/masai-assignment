@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar flex align-center justify-end">
+            <section class="right-navbar-link flex">
+                <div><a href="home.html">Home</a></div>
+                <div><a href="login.html">Login</a></div>
+                <div><a href="signup.html">Signup</a></div>  
+            </section>
+        </nav>
+    </header>
+    <main>
+        <h1>SignUp Page</h1>
+        <form>
+         <input type="text" id="name" placeholder="enter name">
+         <input type="number" id="number" placeholder="enter mobile number">
+          <input type="email" id="email" placeholder="enter email">
+          <input type="password" id="password" placeholder="enter password">
+          <input type="submit">
+
+
+        </form>
+    </main>
+</body>
+
+</html>
+<script>
+
+document.querySelector("form").addEventListener("submit",singUpDetail);
+ let arr = JSON.parse(localStorage.getItem("userDetail"))||[];
+function singUpDetail(event){
+    event.preventDefault();
+  var name = document.getElementById("name").value;
+  var number = document.getElementById("number").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+
+  let userDetail ={
+      userName: name,
+      number: number,
+      email: email,
+      password: password
+
+  }
+ 
+if(name !=="" || email !== "" || password !== ""||number !== ""){
+    arr.push(userDetail);
+ localStorage.setItem("userDetail", JSON.stringify(arr));
+    window.location.href="./login.html";
+
+}else if(name =="" || email == "" || password == ""||number == ""){
+    alert("fill the details");
+}
+}
+
+
+
+</script>

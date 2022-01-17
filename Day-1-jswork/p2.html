@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .heading{
+        width: 10%;
+        height: 100px;
+        border: 1px solid red;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        font-weight: bold;
+    }
+    .button{
+        /* height: 80px; */
+        /* border: 1px solid red; */
+        margin: auto;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 30px 0 30px;
+    }
+    button{
+        padding: 10px 30px;
+        color: white;
+        background-color: rgb(138, 14, 14);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover{
+        padding: 10px 30px;
+        color: white;
+        background-color: rgba(22, 112, 14, 0.747);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    h1{
+      text-align: center;
+    }
+
+    </style>
+</head>
+<body>
+  <h1>Ludo</h1>
+    <div class="heading"></div>
+    <div class="button">
+        <button class="dice">Throw Dice</button>
+        
+
+    </div>
+</body>
+</html>
+<script>
+  document.querySelector(".dice").addEventListener("click", diceClick);
+  function diceClick() {
+   var heading = document.querySelector(".heading");
+   var randomNumber = Math.floor(Math.random() *6+1);
+
+   if(randomNumber == "1"){
+    heading.textContent = randomNumber;
+
+     heading.style.color = "red";
+   }
+   else if(randomNumber == "6"){
+    heading.textContent = randomNumber;
+
+
+heading.style.color = "green";
+}
+else if(randomNumber == "2"){
+    heading.textContent = randomNumber;
+
+
+heading.style.color = "blue";
+}  else if(randomNumber == "3"){
+    heading.textContent = randomNumber;
+
+
+heading.style.color = "pink";
+}
+else if(randomNumber == "4"){
+    heading.textContent = randomNumber;
+
+
+heading.style.color = "teal";
+}
+else if(randomNumber == "5"){
+    heading.textContent = randomNumber;
+
+
+heading.style.color = "yellow";
+}
+
+  }
+</script>

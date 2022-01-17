@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar flex align-center justify-end">
+            <section class="right-navbar-link flex">
+                <div><a href="home.html">Home</a></div>
+                <div><a href="login.html">Login</a></div>
+                <div><a href="signup.html">Signup</a></div>   
+            </section>
+        </nav>
+    </header>
+    <main>
+<div class="slide-button">
+     <button onclick="slideStart()">Start slide</button>
+     <button onclick="slidePause()">Pause slide</button>
+    <button onclick="descending()">High to low</button>
+    <button onclick="ascending()">Low to High</button>
+
+
+</div>
+<div id="slide-images"></div>
+<div id="movies"></div>
+
+
+    </main>
+</body>
+</html>
+
+
+<script>
+  let images = JSON.parse(localStorage.getItem("images"))||[];
+  let moviesData = JSON.parse(localStorage.getItem("moviesData"))||[];
+  showMovies(moviesData);
+     console.log(moviesData);
+     let slide_images = document.getElementById("slide-images");
+     let img = document.createElement("img");
+     img.src = images[0]
+     slide_images.append(img);
+     let id;
+
+     function descending(){
+      moviesData.sort(function(a, b){
+        console.log("here")
+
+          return Number(b.imdbRating) - Number(a.imdbRating);
+      })
+      showMovies(moviesData);
+      
+
+     }
+
+     function ascending(){
+      moviesData.sort(function(a, b){
+        console.log("here")
+
+          return Number(a.imdbRating) - Number(b.imdbRating);
+      })
+      showMovies(moviesData);
+      
+
+     }
+    //  slide_images.addEventListener("mouseenter",slideStart)
+
+
+
+     
+function slideStart(){
+      
+    let i = 0;
+    id = setInterval(function(){
+
+        if (i == images.length){
+           
+           i = 0;
+        }
+        console.log(i);
+        img.src = images[i];
+        slide_images.append(img);
+           i++;
+
+     },2000)
+
+}
+function slidePause(){
+  clearInterval(id);
+}
+
+
+function showMovies(moviesData){
+    let moviesDiv = document.getElementById("movies");
+    moviesDiv.textContent="";
+moviesData.map(function(elem){
+   let div = document.createElement("div");
+   let imageDiv = document.createElement("div");
+   imageDiv.setAttribute("id","imageDiv");
+   let textDiv = document.createElement("div");
+   textDiv.setAttribute("id","textDiv");
+   let img = document.createElement("img");
+   img.src = elem.image_url;
+   let movieName = document.createElement("p");
+   movieName.innerHTML = elem.movieName;
+   let release = document.createElement("p");
+   release.innerHTML = elem.releaseDate;
+   let rating = document.createElement("p");
+   rating.innerHTML = `Imdb_rating: ${elem.imdbRating}`;
+   
+
+   imageDiv.append(img);
+   textDiv.append(movieName,release,rating)
+   div.append(imageDiv,textDiv);
+   moviesDiv.append(div)
+
+})
+}
+
+
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+let masai_array = new MyArray(1,2,3,4);
+function MyArray(){
+ this.length = arguments.length;
+
+ Object.defineProperty(this, "length",{
+     writable: true,
+     enumerable: false
+ })
+
+ for(var i = 0; i<this.length; i++){
+     this[i] = arguments[i];
+ }
+
+}
+// Pushing a new value to the array
+
+MyArray.prototype.myPush = function(elem){
+  
+
+    this[this.length] = elem;
+    this.length++;
+
+}
+MyArray.prototype.reverseArray = function(el,index,array){
+     
+     this[0];
+     
+ }
+
+masai_array.myPush(5);
+
+// Reversing the array and returning it
+
+
+masai_array.reverseArray();
+
+console.log("masai_array:", Object.values(masai_array));
+
+
+</script>

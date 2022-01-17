@@ -1,0 +1,16 @@
+.navbar{
+    /* border: 1px solid red; */
+    width: 80%;
+    height: 50px;
+    margin: auto;
+    background-color:rgb(22, 13, 13);
+    color: white;
+}
+.right-navbar-link div{
+    margin-right: 40px;
+    
+}
+.right-navbar-link div a{
+    text-decoration: none;
+    color: white;
+}

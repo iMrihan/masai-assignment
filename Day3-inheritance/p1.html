@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+// <------Using Object.create()----->
+
+let grandParents = {
+    grandFather: "Noor Khan",
+    grandMother: "Kaneej"
+
+}
+
+let parents = Object.create(grandParents);
+parents.fatherName = "Munsaf Ali";
+parents.MotherName = "Shayra Bano";
+
+let myName = Object.create(parents);
+myName.myName = "Rihan Khan";
+console.log("myName:", myName);
+
+
+
+// // <-------Using constructor functions.------>
+
+//     function myName(){
+//         this.myName = "Rihan Khan";
+
+//     }
+//    function grandParent(){
+//        this.grandFather ="Noor Khan";
+//        this.grandMother="Kaneej";
+//    }
+
+//     myName.prototype.fatherName = "Munsaf Ali";
+//     myName.prototype.motherName = "Sayra Bano";
+    
+        
+
+//   let s1 = new myName();
+//   console.log("s1:", s1);
+
+</script>

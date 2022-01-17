@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin Page2</h1>
+    <a href="home.html"><button>Go to home page</button></a>
+    
+    <form>
+        <input type="text" id="url" placeholder="enter url">
+        <input type="text" id="movieName" placeholder="Enter movie name">
+        <input type="text" id="movieDate" placeholder="Enter release date">
+        <input type="number" id="rating" placeholder="Enter ImdbRating">
+        <input type="submit">
+    </form>
+    
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit",imageUrl);
+    imageArr = JSON.parse(localStorage.getItem("moviesData"))||[];
+    console.log(imageArr);
+    function imageUrl(event) {
+        event.preventDefault();
+
+        let image_url = document.getElementById("url").value;
+        let movieName = document.getElementById("movieName").value;
+        let releaseDate = document.getElementById("movieDate").value;
+        let imdbRating = document.getElementById("rating").value;
+       let movieData ={
+         image_url:image_url,
+         movieName: movieName,
+         releaseDate: releaseDate,
+         imdbRating: imdbRating
+
+
+       }
+
+      imageArr.push(movieData);
+      localStorage.setItem("moviesData",JSON.stringify(imageArr));
+    }
+
+
+
+
+</script>

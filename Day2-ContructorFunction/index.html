@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+// function NikeProduct(){
+//     let product = {
+//         user: "pablo",
+//         product: "shoes",
+//         price: 1000
+//     }
+//     return product;
+
+// }
+
+
+
+// var p1 = NikeProduct();
+// console.log("p1:",p1);
+
+// function NikeProductS(u,product,price){
+ 
+// let products ={};
+// products.user = u;
+// products.name = product;
+// products.price = price;
+// return products;
+
+// }
+
+// let s1 = NikeProductS("pablo","shoes",2000);
+// console.log(s1);
+
+// function NikeProductCF(){
+
+
+
+
+//         this.user = "pablo";
+//         this.product = "shoes";
+//         this.price = 1000;
+// }
+
+// var p2 = new NikeProductCF();
+// console.log("p2:",p2);
+
+
+//   var arr = [];
+//      function newspaper(h){
+
+//       this.date = new Date();
+//       this.id = Math.floor(Math.random()*100);
+//       this.heading = h;
+//       this.publication = "Amar ujala";
+
+
+//      }
+
+     
+//    for(let i = 0; i< 100; i++){
+//     let n1 = new newspaper("pablo pandey bought tesla");
+//      arr.push(n1);
+//  }
+//         console.log(arr);
+
+
+// let kitchen = {
+//   name:'kitchen',
+//   purpose: "cook",
+//   order: "meal",
+
+//    cookFood(){
+//      console.log(`Serving ${this.order}`);
+//    }
+// }
+
+
+// let bedroom = {
+//   name:'bedroom',
+//   purpose: "sleep",
+//   order: "maggie",
+
+// }
+
+// let living = {
+//   name: "living",
+//   order:"samosa",
+// }
+
+
+// kitchen.cookFood();
+// kitchen.cookFood.call(bedroom);
+// let x = kitchen.cookFood.bind(living);
+// x();
+
+// let a = {
+//   parent: "jethalal"
+// }
+
+// let b = Object.create(a);
+// b.name = "pablo";
+// console.log(b);
+
+// let cat = {
+//   type: "cat",
+//   tail: true,
+//   fur: true,
+//   leg: 4
+// }
+
+
+//  let tiger = Object.create(cat);
+//  tiger.speed = 60;
+
+//  let cheetah = Object.create(cat);
+//  cheetah.speed = 100;
+ 
+//  console.log("cheetah:",cheetah);
+//  console.log("tiger:" , tiger);
+
+
+
+//  let shoes = {
+//   seller: "amazone",
+//   brand: "nike",
+//   material: "leather",
+//   type: "sneakers"
+// }
+
+
+// let s1 = Object.create(shoes);
+// s1.price = 4000;
+// console.log(s1.hasOwnProperty("price"))
+
+
+// function newspaper(h){
+
+//       this.date = new Date();
+//       this.id = Math.floor(Math.random()*100);
+//       this.heading = h;
+//       this.publication = "Amar ujala";
+
+
+//      }
+
+//      let s3 = new newspaper("Tarun marrying Katrina");
+
+//      newspaper.prototype.advertisement = "tanish juwerally Rs 1"
+//      console.log("s3:", s3);
+  
+
+  // function shoes(){
+    
+  //   this.brand = "nike";
+  //   this.seller = "flipkart";
+  //   this.type = "sports";
+  //   this.material = "leather";
+  // }
+
+  // let s4 = new shoes();
+
+  // shoes.prototype.coupon = 30;
+  // console.log("s4:", s4);
+
+// var arr = new Array(1,2,3);
+// console.log("arr:", arr);
+
+
+
+
+// function MyArray(){
+//   this.length = arguments.length;
+//  Object.defineProperty(this, "length" ,{
+//  writable: true,
+//  enumerable: false
+
+//  });
+//   for(let i = 0; i < this.length; i++){
+//     this[i] = arguments[i];
+//   }
+// }
+// MyArray.prototype.myPush = function(el){
+
+// this[this.length] = el;
+// this.length++;
+// }
+
+// MyArray.prototype.hatao = function(){
+//   let index = this.length -1;
+//   delete this[index];
+//   this.length--;
+// }
+
+// let masai_array = new MyArray(1,2,3);
+// masai_array.myPush(4)
+// masai_array.myPush(5)
+// masai_array.hatao();
+// masai_array.hatao()
+
+// console.log("masai_array:", Object.values(masai_array));
+
+ 
+let masai_array = new MyArray(1,2,3);
+function MyArray(){
+  this.length = arguments.length;
+
+  Object.defineProperty(this, "length",{
+   writable: true,
+   enumerable: false
+
+  })
+
+  for(let i = 0; i < this.length; i++){
+    this[i] = arguments[i];
+  }
+}
+
+MyArray.prototype.myPushed = function(el){
+ 
+this[this.length] = el;
+this.length++;
+
+}
+
+MyArray.prototype.remove = function(){
+  let index = this.length - 1;
+  delete this[index];
+  this.length--;
+}
+masai_array.myPushed(4);
+masai_array.myPushed(5);
+masai_array.remove()
+masai_array.remove()
+masai_array.remove()
+
+
+console.log("masai_array:",Object.values(masai_array));
+</script>

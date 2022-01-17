@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin Page</h1>
+    <a href="home.html"><button>Go to home page</button></a>
+    <a href="admin2.html"><button>Go to admin2 page</button></a>
+    <form>
+        <input type="text" id="url" placeholder="enter url">
+        <input type="submit">
+    </form>
+    
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit",imageUrl);
+    imageArr = JSON.parse(localStorage.getItem("images"))||[];
+    console.log(imageArr);
+    function imageUrl(event) {
+        event.preventDefault();
+
+        let url = document.getElementById("url").value;
+       
+
+      imageArr.push(url);
+      localStorage.setItem("images",JSON.stringify(imageArr));
+    }
+
+
+
+
+</script>

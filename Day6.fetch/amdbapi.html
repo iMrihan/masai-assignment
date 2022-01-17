@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 50%;
+            margin: auto;
+            display: flex;
+            
+        }
+
+        #notfound{
+            width: 50%;
+            margin: auto;
+            
+        }
+        #notfound>img{
+            width: 60%;
+        }
+        .recom{
+            font-size:30px;
+            color: red;
+            font-weight:bold;
+            padding: 100px 20px;
+        }
+    </style>
+</head>
+<body>
+    
+        <label>Title</label>
+       <input type="text" id="movie" placeholder="enter movie name here">
+         <button onclick="fetchApi()">Search</button>
+    
+    <div id="container"></div>
+    <div id="notfound"></div>
+</body>
+</html>
+
+<script>
+    
+
+        
+         
+          
+         async function fetchApi(){
+            let title = document.getElementById("movie").value;
+        
+            
+         try{
+          let res = await fetch(`http://www.omdbapi.com/?apikey=34794a1f&t= ${title}`);
+          let data = await res.json();
+         
+          console.log("data:",data);
+          movie(data);
+
+         }
+         catch(err){
+             console.log("err:",err);
+         }
+
+
+         }
+        //  fetchApi();
+         let container = document.getElementById("container");
+         let notFoundDiv = document.getElementById("notfound");
+
+       function movie(d){
+           if(d.Response == "True"){
+               if(Number(d.imdbRating) > 8.5){
+                container.innerHTML = "";
+         notFoundDiv.textContent="";
+
+          let div = document.createElement("div");
+          let recommendedDiv = document.createElement("div");
+          let image = document.createElement("img");
+          image.src = d.Poster;
+          let titles = document.createElement("p");
+          titles.textContent = `Title: ${d.Title}`;
+
+          let recommended = document.createElement("p");
+          recommended.textContent ="Recommended";
+          recommended.setAttribute("class","recom");
+          recommendedDiv.append(recommended);
+          console.log(recommendedDiv);
+
+
+          let release_date = document.createElement("p");
+          release_date.textContent= `Released: ${d.Released}`;
+
+          let rating = document.createElement("p");
+          rating.textContent = `Rating: ${d.imdbRating}`;
+
+          let year = document.createElement("p");
+          year.textContent = `Year: ${d.Year}`;
+
+
+          div.append(image,titles,release_date,rating,year);
+          container.append(recommendedDiv,div);
+               }else{
+                container.innerHTML = "";
+         notFoundDiv.textContent="";
+
+          let div = document.createElement("div");
+          let image = document.createElement("img");
+          image.src = d.Poster;
+          
+          let titles = document.createElement("p");
+          titles.textContent = `Title: ${d.Title}`;
+          let release_date = document.createElement("p");
+          release_date.textContent= `Released: ${d.Released}`;
+
+          let rating = document.createElement("p");
+          rating.textContent = `Rating: ${d.imdbRating}`;
+
+          let year = document.createElement("p");
+          year.textContent = `Year: ${d.Year}`;
+
+
+          div.append(image,titles,release_date,rating,year);
+          container.append(div);
+               }
+         
+         
+           }
+        else{
+            container.innerHTML = "";
+
+            notFoundDiv.textContent="";
+          let img = document.createElement("img");
+          img.setAttribute("src","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqdPaocnn6LffN4CJByvA02wMA6xzwYTnfzA&usqp=CAU");
+          notFoundDiv.append(img);
+
+            
+        }
+
+
+     
+
+
+
+          
+
+
+
+     }
+   
+    
+
+
+</script>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+   
+      #gmap{
+        overflow:hidden;
+        background:none!important;
+        height:500px;
+        width:600px;
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    City: <input type="text" id="city" />
+    <button onclick="getWeather()">Search</button>
+    <div id="weather"></div>
+
+   <iframe width="600" height="500" id="gmap"
+    frameborder="0"
+     scrolling="no"
+    marginheight="0"
+      
+    marginwidth="0">
+  </iframe>
+
+  </body>
+</html>
+
+<script>
+  async function getWeather() {
+    let city = document.getElementById("city").value;
+    let response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=bafa1096df6dcf09c258a854f825ee20&units=metric`
+    );
+    let data = await response.json();
+    showWeather(data);
+    googleMap(city);
+    console.log("data:", data);
+  }
+
+  let dataDiv = document.getElementById("weather");
+  function showWeather(weather) {
+    dataDiv.innerHTML = "";
+
+    let temp = document.createElement("p");
+    temp.innerHTML = `Temp: - ${weather.main.temp}`;
+
+    let temp_max = document.createElement("p");
+    temp_max.innerHTML = `temp_max: - ${weather.main.temp_max}`;
+
+    let temp_min = document.createElement("p");
+    temp_min.innerHTML = `temp_min: - ${weather.main.temp_min}`;
+ 
+    let sunrise = document.createElement("p");
+    sunrise.innerHTML = `sunrise:🌅  - ${weather.sys.sunrise}`;
+    
+    
+
+    let sunset = document.createElement("p");
+    sunset.innerHTML = `sunset:🌇  - ${weather.sys.sunset}`;
+
+    let wind = document.createElement("p");
+    wind.innerHTML = `Wind Speed: - ${weather.wind.speed}`;
+
+    let pressure = document.createElement("p");
+    pressure.innerHTML = `pressure: - ${weather.main.pressure}`;
+
+    let humidity = document.createElement("p");
+    humidity.innerHTML = `humidity: - ${weather.main.humidity}`;
+    dataDiv.append(temp, temp_max,temp_min,sunrise,sunset, wind,pressure, humidity);
+  }
+
+ function googleMap(city){
+
+  let map = document.getElementById("gmap");
+  map.src = `https://maps.google.com/maps?q=${city}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+ }
+ 
+
+
+
+</script>

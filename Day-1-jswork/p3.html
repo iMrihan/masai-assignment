@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .heading{
+        width: 60%;
+        height: 400px;
+        border: 1px solid red;
+        margin: auto;
+    }
+    .button{
+        width: 60%;
+        /* height: 80px; */
+        border: 1px solid red;
+        margin: auto;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 30px 0 30px;
+    }
+    button{
+        padding: 10px 30px;
+        color: white;
+        background-color: rgb(138, 14, 14);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover{
+        padding: 10px 30px;
+        color: white;
+        background-color: rgba(22, 112, 14, 0.747);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="heading"></div>
+    <div class="button">
+        <button class="object">Object</button>
+        <button class="arrays">Arrays</button>
+        <button class="function">Function</button>
+        <button class="string">String</button>
+        <button class="number">Number</button>
+        <button class="null">Null</button>
+        <button class="undefined">Undefined</button>
+
+    </div>
+</body>
+</html>
+<script>
+ var obj = document.querySelector(".object");
+ obj.addEventListener("click",object); 
+ function object() {
+     document.querySelector(".heading").innerHTML ="<h3>1. JavaScript variables can also contain many values.</h3><h3>2. Objects are variables too. But objects can contain many values.</h3><h3>3. Object values are written as name : value pairs (name and value separated by a colon).</h3><h3>4. In object we can change the values it is called mutability. Object is an non-primitive data type.</h3><h3>5. In JavaScript, almost 'everything' is an object.</h3>";
+ }
+
+ var arrays = document.querySelector(".arrays");
+ arrays.addEventListener("click",array); 
+ function array() {
+     document.querySelector(".heading").innerHTML ="<h3>1) An array holds elements that have the same data type.</h3><h3>2) Array elements are stored in subsequent memory locations.</h3><h3>3) Two-dimensional array elements are stored row by row in subsequent memory locations.</h3><h3>4. In array we can change the values it is called mutability.Array is an non-primitive data type. </h3><h3>5) Array name represents the address of the starting element.</h3>";
+ }
+
+
+ var fns = document.querySelector(".function");
+ fns.addEventListener("click",fn); 
+ function fn() {
+     document.querySelector(".heading").innerHTML ="<h3>1) Every function in JavaScript is a Function object. See Function for information on properties and methods of Function objects.</h3><h3>2) You definitely can add a property directly to a function. It's not always the most appropriate way to go, but it is (deliberately) part of the language and works fine. (It has a different purpose to adding properties to the prototype.)</h3><h3>3) A function is a block of code that performs a specific task. Suppose you need to create a program to create a circle and color it. You can create two functions ...</h3><h3>4. In function we can change the values it is called mutability.function is an non-primitive data type. </h3><h3>5) function name represents the address of the starting element.</h3>";
+ }
+
+ var strings = document.querySelector(".string");
+ strings.addEventListener("click",string); 
+ function string() {
+     document.querySelector(".heading").innerHTML ="<h3>1. Used to get the Char object at a specified position in the current String object.</h3><h3>2. Used to get the number of characters in the current String object.</h3><h3>3. The String object is used to represent and manipulate a sequence of characters.</h3><h3>4. In string we can change the values it is called non-mutability. string is an primitive data type.</h3><h3>5. Strings can be created as primitives, from string literals, or as objects, using the String() constructor:</h3>";
+ }
+ var numbers = document.querySelector(".number");
+ numbers.addEventListener("click",number); 
+ function number() {
+     document.querySelector(".heading").innerHTML ="<h3>1. Number is a primitive wrapper object used to represent and manipulate numbers like 37 or -9.25.</h3><h3>2. When used as a function, Number(value) converts a string or other value to the Number type. If the value can't be converted, it returns NaN.</h3><h3>3. Creates a new Number value.</h3><h3>4. The smallest interval between two representable numbers.</h3><h3>5. JavaScript has a Number object that is a wrapper for primitive numeric values. It is used to represent and manipulate numbers. · Number properties · MIN_VALUE.</h3>";
+ }
+
+ var nuls = document.querySelector(".null");
+ nuls.addEventListener("click", nul); 
+ function nul() {
+     document.querySelector(".heading").innerHTML ="<h3>1. The value null represents the intentional absence of any object value. It is one of JavaScript's primitive values and is treated as falsy for boolean operations.</h3><h3>2. The value null represents the intentional absence of any object value. It is one of JavaScript's primitive values and is treated as falsy for boolean operations.</h3><h3>3. The value null is written with a literal: null. null is not an identifier for a property of the global object, like undefined can be. Instead, null expresses a lack of identification, indicating that a variable points to no object. In APIs, null is often retrieved in a place where an object can be expected but no object is relevant.</h3><h3>4.  Call the Object.values(obj) method passing in the object. · Call the Array. · The function should check if each value is equal to null and return .</h3><h3>5. In JavaScript, each variable can hold both object values and primitive values. Therefore, if null means “not an object”, JavaScript also needs an initialization.</h3>";
+ }
+
+ var undefinedss = document.querySelector(".undefined");
+ undefinedss.addEventListener("click",undefineds); 
+ function undefineds() {
+     document.querySelector(".heading").innerHTML ="<h3>1. The undefined property is used to check if a value is assigned to a variable or not. Return Value: It returns 'defined' if the variable is assigned any value and 'undefined' if the variable is not assigned any value.</h3><h3>2. The global undefined property represents the primitive value undefined. It is one of JavaScript's primitive types.</h3><h3>3. undefined is a property of the global object. That is, it is a variable in global scope. The initial value of undefined is the primitive value undefined.</h3><h3>4. One reason to use typeof is that it does not throw an error if the variable has not been declared.</h3><h3>5. The global scope is bound to the global object, so checking the existence of a variable in the global context can be done by checking the existence of a property on the global object, using the in operator, for instance:</h3>";
+ }
+</script>

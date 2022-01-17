@@ -1,0 +1,164 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			#container {
+				width: 50%;
+				margin: auto;
+				display: flex;
+			}
+
+			#notfound {
+				width: 50%;
+				margin: auto;
+			}
+			#notfound > img {
+				width: 60%;
+			}
+			.recom {
+				font-size: 30px;
+				color: red;
+				font-weight: bold;
+				padding: 100px 20px;
+			}
+			input {
+				width: 200px;
+			}
+			#movies {
+				height: 200px;
+				width: 210px;
+				border: 1px solid black;
+				overflow: scroll;
+				display: none;
+				flex-direction: column;
+			}
+			#mainDiv {
+				display: flex;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="mainDiv">
+			<div>
+				<label>Title</label><br />
+				<input
+					oninput="debounce(fetchApi,1000)"
+					type="text"
+					id="movie"
+					placeholder="enter movie name here"
+				/>
+				<div id="movies"></div>
+			</div>
+
+			<div id="container"></div>
+		</div>
+	</body>
+</html>
+
+<script>
+	let movie_div = document.getElementById("movies");
+	let movie_waiting;
+	async function fetchApi() {
+		let movie = document.getElementById("movie").value;
+
+		try {
+			let res = await fetch(
+				`http://www.omdbapi.com/?apikey=d806bd70&s=${movie}`
+			);
+			let data = await res.json();
+
+			console.log("data:", data);
+			let movie_arr = data.Search;
+			appendMovie(movie_arr);
+		} catch (err) {
+			console.log("err:", err);
+		}
+	}
+	//  fetchApi();
+	let container = document.getElementById("container");
+	let notFoundDiv = document.getElementById("notfound");
+
+	function appendMovie(movies) {
+		movie_div.innerHTML = null;
+
+		if (movies === undefined) {
+			return false;
+		}
+		movies.map(function (elem) {
+			let p = document.createElement("p");
+			p.innerHTML = elem.Title;
+			p.style.cursor = "pointer";
+			movie_div.style.display = "flex";
+
+			movie_div.append(p);
+			p.addEventListener("click", function () {
+				movie_div.style.display = "none";
+
+				if (Number(elem.imdbRating) > 8.5) {
+					container.innerHTML = "";
+
+					let div = document.createElement("div");
+					let recommendedDiv = document.createElement("div");
+					let image = document.createElement("img");
+					image.src = elem.Poster;
+					let titles = document.createElement("p");
+					titles.textContent = `Title: ${elem.Title}`;
+
+					let recommended = document.createElement("p");
+					recommended.textContent = "Recommended";
+					recommended.setAttribute("class", "recom");
+					recommendedDiv.append(recommended);
+					console.log(recommendedDiv);
+
+					let type = document.createElement("p");
+					type.textContent = `Type: ${elem.Type}`;
+
+					let rating = document.createElement("p");
+					rating.textContent = `imdbID: ${elem.imdbID}`;
+
+					let year = document.createElement("p");
+					year.textContent = `Year: ${elem.Year}`;
+
+					div.append(image, titles, type, rating, year);
+					container.append(recommendedDiv, div);
+				} else {
+					container.innerHTML = "";
+
+					let div = document.createElement("div");
+					let image = document.createElement("img");
+					image.src = elem.Poster;
+
+					let titles = document.createElement("p");
+					titles.textContent = `Title: ${elem.Title}`;
+					let type = document.createElement("p");
+					type.textContent = `Type: ${elem.Type}`;
+
+					let rating = document.createElement("p");
+					rating.textContent = `ImdbID: ${elem.imdbID}`;
+
+					let year = document.createElement("p");
+					year.textContent = `Year: ${elem.Year}`;
+
+					div.append(image, titles, type, rating, year);
+					container.append(div);
+				}
+			});
+		});
+	}
+
+	function debounce(funs, delay) {
+		if (movie_waiting) {
+			clearTimeout(movie_waiting);
+		}
+
+		movie_waiting = setTimeout(function () {
+			funs();
+		}, delay);
+	}
+</script>

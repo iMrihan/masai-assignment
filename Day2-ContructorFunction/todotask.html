@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        display: flex;
+        width: 90%;
+        height: 550px;
+        margin: auto;
+      }
+      #container > div {
+        width: 45%;
+        height: 100%;
+        margin: auto;
+      }
+      #addTask {
+        color: #679eb3;
+        border-bottom: 1px solid grey;
+        width: 35%;
+        height: 10%;
+        font-size: 30px;
+      }
+      form {
+        font-weight: bold;
+        color: #4b4d50;
+
+      }
+      
+      #task {
+        margin: 10px 0px;
+        padding: 2% 1% 1% 1%;
+      }
+     
+      #date {
+        padding: 1% 5% 1% 2%;
+        margin: 10px 0px;
+        
+        
+      }
+      #add {
+        padding: 10px 30px;
+        margin-top: 10px;
+        color: white;
+        background-color: blue;
+        border: 0;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      th,
+      td {
+        padding: 7px 30px;
+        
+      }
+    
+      
+      #pdIn {
+        width: 110%;
+        height: 10%;
+        display: flex;
+        justify-content: space-between;
+        
+      }
+      tr {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      }
+      #count{
+          margin-right: 110px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftDiv">
+        <h1 id="addTask">Add Task</h1>
+        <form>
+          
+          <label>Task</label><br />
+          <input type="text" id="task" /><br />
+         
+          <!-- <label>Date</label><br />
+          <input type="date" id="date" /><br /> -->
+          <input type="submit" value="Add" id="add" />
+        </form>
+      </div>
+      <div id="rightDiv">
+        <div id="pdIn"><h2>Todo List</h2>
+            <h2 id="count">Task count =<span id="counts"></span></h2></div>
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Mark</th>
+              <th>Remove</th>
+              
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector("form").addEventListener("submit", addItems);
+  var todoArr = JSON.parse(localStorage.getItem("todoData")) || [];
+  displayAll(todoArr);
+
+  function addItems(event) {
+    event.preventDefault();
+    var task = document.getElementById("task").value;
+    
+    // var date = document.getElementById("date").value;
+    // console.log(task, date);
+
+    
+   function todoDetails(t){
+       this.task = t;
+    
+       this.status = "False";
+       let n =  new Date();
+      this.y = n.getFullYear();
+      this.m = n.getMonth() + 1;
+      this.d = n.getDate();
+   }
+
+   let s1 = new todoDetails(task)
+//    console.log(s1)
+    
+    todoArr.push(s1);
+    localStorage.setItem("todoData", JSON.stringify(todoArr));
+    displayAll(todoArr);
+  }
+   
+  function displayAll() {
+    var count = 0;
+
+    document.querySelector("tbody").textContent = "";
+    document.getElementById("counts").textContent = count;
+
+
+    todoArr.map(function (elem, index) {
+        
+        
+      var tr = document.createElement("tr");
+      var taskCount  = document.getElementById("counts");
+      count++;
+
+      taskCount.textContent = count;
+
+      var td1 = document.createElement("td");
+      td1.textContent = elem.task;
+      var td2 = document.createElement("td");
+      
+      td2.textContent = elem.d + "/" + elem.m + "/" + elem.y;
+
+      var td3 = document.createElement("td");
+      var btn2 = document.createElement("toggle");
+      td3.textContent = elem.status;
+      td3.addEventListener("click",function(){
+
+        console.log(td3.textContent);
+          if(td3.textContent == "False"){
+            td3.textContent ="True";
+          }else{
+            td3.textContent ="False";
+          }
+      })
+      td3.style.cursor="pointer";
+      var td4 = document.createElement("td");
+      var btn = document.createElement("button");
+      td4.append(btn)
+      btn.textContent = "Done";
+      btn.addEventListener("click",function(){
+        td1.style.color="green";
+        td1.style.textDecoration="line-through";
+      })
+      td4.style.cursor="pointer";
+      
+      
+      
+      var button = document.createElement("button");
+      button.textContent = "Delete";
+      button.addEventListener("click", function () {
+        deleteTask(index);
+      });
+      var td5 = document.createElement("td");
+       td5.append(button)
+       button.style.cursor="pointer";
+      document.querySelector("tbody").append(tr);
+      tr.append(td1, td2, td3, td4, td5);
+    });
+  }
+  function deleteTask(index) {
+    todoArr.splice(index, 1);
+    console.log(index);
+    localStorage.setItem("todoData", JSON.stringify(todoArr));
+    displayAll();
+  }
+</script>

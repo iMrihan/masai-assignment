@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar flex align-center justify-end">
+            <section class="right-navbar-link flex">
+                <div><a href="home.html">Home</a></div>
+                <div><a href="login.html">Login</a></div>
+                <div><a href="signup.html">Signup</a></div>
+                
+            </section>
+
+        </nav>
+    </header>
+
+    <main>
+        <h1>Login Page</h1>
+        <form>
+
+            <input type="email" id="email" placeholder="enter email">
+            <input type="password" id="password" placeholder="Enter password">
+            <input type="submit">
+        </form>
+    </main>
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit",loginUser);
+    let userArr = JSON.parse(localStorage.getItem("userDetail"))||[] ;
+    console.log(userArr)
+   
+         
+    function loginUser(event){
+        event.preventDefault();
+
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+         if(email == "admin@gmail.com" && password == "admin"){
+           
+           window.location.href="./admin.html";
+           return;
+         }
+
+
+        for (var i = 0; i < userArr.length; i++) {
+          
+    if (email == userArr[i].email && password == userArr[i].password) {
+      // console.log(userArr[i].email, userArr[i].password);
+      window.location.href = "./home.html";
+
+      alert("login successful");
+      return;
+    } else if (email == "" || password == "") {
+      alert("Fill the details");
+      return;
+    } else if (
+      email !== userArr[i].email &&
+      password !== userArr[i].password
+    ) {
+      alert("wrong email or password");
+      return;
+    }
+  }
+
+       
+
+    }
+    
+</script>
